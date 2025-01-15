@@ -179,8 +179,9 @@ int main(int argc, char *argv[]) {
 			}
 
 			size_t lastindex = corrupt.find_last_of(".");
+		        std::string filetype = corruptfilepath.substr(lastindex);
 			if(output_filename.size() == 0)
-				output_filename = corrupt.substr(0, lastindex) + "_fixed.mp4";
+				output_filename = corrupt.substr(0, lastindex) + "_fixed" + filetype;
 			mp4.saveVideo(output_filename);
 		}
 	} catch(string e) {

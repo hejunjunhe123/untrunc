@@ -894,6 +894,9 @@ int64_t Mp4::contentStart() {
 		}
 	}
 	sort(offsets.begin(), offsets.end());
+    if (offsets.size() == 0) {
+        return 0;
+    }
 	return offsets[0];
 }
 
@@ -1224,7 +1227,9 @@ bool Mp4::repair(string corrupt_filename, Mp4::MdatStrategy strategy, int64_t md
 			cout << "AHGH" << endl;
 
 		MatchGroup group = match(offset, mdat);
-
+        if (group.size() == 0) {
+            return false;
+        }
 		Match &best = group.back();
 
 		/*MatchGroup group;

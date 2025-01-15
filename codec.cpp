@@ -67,7 +67,7 @@ bool Codec::parse(Atom *trak) {
 			pcm_bytes_per_sample = stsd->readInt(52);
 		} else if(version == 2) {
 			//TODO verify this number!
-			pcm_bytes_per_sample = stsd->readInt(24 + 13*4);
+			pcm_bytes_per_sample = stsd->readInt(24 + 13*4) * 2;
 			assert(pcm_bytes_per_sample < 128);
 		}
 
@@ -143,7 +143,7 @@ Match Codec::search(const unsigned char *start, int maxlength, int maxskip) {
 	}
 
 	Match match;
-	return match;
+	//return match;
 
 	int count = 0;
 	for(int offset = 8; offset < maxlength - 8; offset++) {
