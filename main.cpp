@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
 			}
 
 			size_t lastindex = corrupt.find_last_of(".");
-		        std::string filetype = corruptfilepath.substr(lastindex);
+		        std::string filetype = corrupt.substr(lastindex);
 			if(output_filename.size() == 0)
 				output_filename = corrupt.substr(0, lastindex) + "_fixed" + filetype;
 			mp4.saveVideo(output_filename);
