@@ -269,7 +269,7 @@ void Mp4::printMediaInfo() {
 		Log::info << "Media Info:\n"
 				  << "  Default stream: " << av_find_default_stream_index(context) << '\n';
 		AvLog useAvLog(AV_LOG_INFO);
-		FileRedirect redirect(stderr, stdout);
+		//FileRedirect redirect(stderr, stdout);
 		av_dump_format(context, 0, file_name.c_str(), 0);
 	}
 }
