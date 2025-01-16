@@ -360,7 +360,7 @@ bool Mp4::makeStreamable(string filename, string output_filename) {
 	return true;
 }
 
-bool Mp4::save(string output_filename) {
+bool Mp4::save(string output_filename, RepairCallback *callback) {
 	// We save all atoms except:
 	//  ctts: composition offset (we use sample to time).
 	//  cslg: because it is used only when ctts is present.
@@ -465,6 +465,9 @@ bool Mp4::save(string output_filename) {
 		moov->write(file);
 		mdat->write(file);
 	}  // {
+        if (NULL != callback) {
+       	    callback->onRepairProcess(100, 100);
+        }
 	return true;
 }
 
@@ -1031,7 +1034,7 @@ double entropy(uint8_t *data, int size) {
 }
 
 
-bool Mp4::repair(string corrupt_filename, Mp4::MdatStrategy strategy, int64_t mdat_begin, bool skip_zeros, bool drifting) {
+bool Mp4::repair(string corrupt_filename, Mp4::MdatStrategy strategy, int64_t mdat_begin, bool skip_zeros, bool drifting, RepairCallback *callback ) {
 	Log::info << "Repair: " << corrupt_filename << '\n';
 	BufferedAtom *mdat = NULL;
 	File file;
@@ -1131,6 +1134,10 @@ bool Mp4::repair(string corrupt_filename, Mp4::MdatStrategy strategy, int64_t md
 	int backtracked = 0;
 	while(offset <  mdat->contentSize()) {
 		int p = 100*offset / mdat->contentSize();
+
+                if (NULL != callback) {
+        	    callback->onRepairProcess(offset, mdat->contentSize());
+                }
 		if(p > percent) {
 			percent = p;
 			Log::info << "Processed: " << percent << "%\n";

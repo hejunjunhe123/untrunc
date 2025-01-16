@@ -34,6 +34,12 @@ class BufferedAtom;
 struct AVFormatContext;
 
 
+class RepairCallback {
+public :
+	RepairCallback(){};
+public:
+	virtual void onRepairProcess(long cur, long total){};
+};
 class Mp4 {
 public:
     int timescale;
@@ -50,7 +56,7 @@ public:
     ~Mp4();
 
 	void open(std::string filename);
-	bool repair(std::string corrupt_filename, Mp4::MdatStrategy strategy = FIRST, int64_t begin = -1, bool skip_zeros = true, bool drifting = false);
+	bool repair(std::string corrupt_filename, Mp4::MdatStrategy strategy = FIRST, int64_t begin = -1, bool skip_zeros = true, bool drifting = false, RepairCallback *callback = NULL);
 	void fixTiming();
 	int64_t findMdat(BufferedAtom *mdat,  MdatStrategy strategy = FIRST);
 	BufferedAtom *findMdat(std::string filename, MdatStrategy strategy);
@@ -59,8 +65,8 @@ public:
 	BufferedAtom *bufferedMdat(Atom *mdat);
 
 
-    bool save     (std::string output_filename);
-    bool saveVideo(std::string output_filename) { return save(output_filename); }
+    bool save     (std::string output_filename, RepairCallback *callback);
+    bool saveVideo(std::string output_filename, RepairCallback *callback) { return save(output_filename, callback); }
 
     void printMediaInfo();
     void printAtoms();
