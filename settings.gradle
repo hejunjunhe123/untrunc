@@ -1,0 +1,10 @@
+include ':app'
+rootProject.name = "libuntrunc"
+include ':app'
+dependencyResolutionManagement {
+    repositories {
+        google()
+        jcenter() 
+        mavenCentral()        
+    }
+}

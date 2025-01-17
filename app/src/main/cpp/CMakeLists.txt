@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18.1)
 include_directories(../jni/include)
-include_directories(../../../)
-include_directories(../../../libav)
+include_directories(../../../../)
+include_directories(../../../../libav)
 
 
 
@@ -82,29 +82,29 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         ../jni/impl/com_hejunsaturday_videoinpainting_VideoUntrunc.cpp
-        ../../../file.cpp
-        ../../../codec_avc1.cpp
-        ../../../codec_mp4a.cpp
-        ../../../codec_pcm.cpp
-        ../../../codec_apch.cpp
-        ../../../codec.cpp
-        ../../../codec_hev1.cpp
-        ../../../codec_gpmd.cpp
-        ../../../codecstats.cpp
-        ../../../codec_text.cpp
-        ../../../codec_mbex.cpp
-        ../../../codec_unknown.cpp
-        ../../../codec_camm.cpp
-        ../../../track.cpp
-        ../../../codec_mp4v.cpp
-        ../../../mp4.cpp
-        ../../../codec_rtp.cpp
-        ../../../atom.cpp
-        ../../../codec_tmcd.cpp
-        ../../../codec_alac.cpp
-        ../../../log.cpp
-        ../../../codec_mijd.cpp
-        ../../../codec_fdsc.cpp
+        ../../../../file.cpp
+        ../../../../codec_avc1.cpp
+        ../../../../codec_mp4a.cpp
+        ../../../../codec_pcm.cpp
+        ../../../../codec_apch.cpp
+        ../../../../codec.cpp
+        ../../../../codec_hev1.cpp
+        ../../../../codec_gpmd.cpp
+        ../../../../codecstats.cpp
+        ../../../../codec_text.cpp
+        ../../../../codec_mbex.cpp
+        ../../../../codec_unknown.cpp
+        ../../../../codec_camm.cpp
+        ../../../../track.cpp
+        ../../../../codec_mp4v.cpp
+        ../../../../mp4.cpp
+        ../../../../codec_rtp.cpp
+        ../../../../atom.cpp
+        ../../../../codec_tmcd.cpp
+        ../../../../codec_alac.cpp
+        ../../../../log.cpp
+        ../../../../codec_mijd.cpp
+        ../../../../codec_fdsc.cpp
         )
 target_link_libraries( # Specifies the target library.
         untrunc
