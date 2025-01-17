@@ -1,0 +1,14 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hejunsaturday.videoinpainting.videountrunc"
+    android:versionCode="2"
+    android:debuggable="false"
+    android:versionName="1.1" >
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="28" />
+
+
+
+</manifest>

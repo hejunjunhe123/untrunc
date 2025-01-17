@@ -73,27 +73,27 @@ const int MaxFrameLength = 20000000;
 // These addresses differ per process and must be statically linked in.
 // Assume that the stream buffers at these stored addresses
 //  are always connected to their underlaying stdio files.
-static const streambuf* const StdioBufs[] = {
+/*static const streambuf* const StdioBufs[] = {
 	cin.rdbuf(), cout.rdbuf(), cerr.rdbuf(), clog.rdbuf()
-};
+};*/
 // Store start-up terminal/TTY statuses of C++ stdio stream buffers.
 // These statuses differ per process and must be statically linked in.
 // Assume that the statuses don't change during the process life-time.
-static const bool StdioTtys[sizeof(StdioBufs)/sizeof(StdioBufs[0])] = {
+/*static const bool StdioTtys[sizeof(StdioBufs)/sizeof(StdioBufs[0])] = {
 		#ifdef _WIN32
 		_isatty(STDIN_FILENO), _isatty(STDOUT_FILENO), _isatty(STDERR_FILENO), _isatty(STDERR_FILENO)
 		#else
 		(bool)isatty(STDIN_FILENO),  (bool)isatty(STDOUT_FILENO),  (bool)isatty(STDERR_FILENO),  (bool)isatty(STDERR_FILENO)
 		#endif
-};
+};*/
 
 // Is a Terminal/Console/TTY connected to the C++ stream?
 // Use on C++ stdio chararacter streams: cin, cout, cerr and clog.
 bool isATerminal(const ios& strm) {
-	for(unsigned int i = 0; i < sizeof(StdioBufs)/sizeof(StdioBufs[0]); ++i) {
+	/*for(unsigned int i = 0; i < sizeof(StdioBufs)/sizeof(StdioBufs[0]); ++i) {
 		if(strm.rdbuf() == StdioBufs[i])
 			return StdioTtys[i];
-	}
+	}*/
 	return false;
 }
 
@@ -269,7 +269,7 @@ void Mp4::printMediaInfo() {
 		Log::info << "Media Info:\n"
 				  << "  Default stream: " << av_find_default_stream_index(context) << '\n';
 		AvLog useAvLog(AV_LOG_INFO);
-		//FileRedirect redirect(stderr, stdout);
+		FileRedirect redirect(stderr, stdout);
 		av_dump_format(context, 0, file_name.c_str(), 0);
 	}
 }
