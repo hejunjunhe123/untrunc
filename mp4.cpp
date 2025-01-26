@@ -52,7 +52,6 @@ extern "C" {
 #include "atom.h"
 #include "file.h"
 #include "log.h"
-
 // Stdio file descriptors.
 #ifndef STDIN_FILENO
 # define STDIN_FILENO   0
@@ -63,7 +62,6 @@ extern "C" {
 
 #include <algorithm>
 using namespace std;
-
 
 namespace {
 const int MaxFrameLength = 20000000;
@@ -397,9 +395,8 @@ bool Mp4::save(string output_filename, RepairCallback *callback) {
 		int track_duration  = static_cast<int>((int64_t(track.duration) * timescale - 1 + track_timescale)
 											   / track_timescale);
 
-		if(duration < track_duration)
+		if(duration < track_duration && track.codec.name != "lpcm")
 			duration = track_duration;
-
 		Atom *tkhd = track.trak->atomByName("tkhd");
 		if(!tkhd) {
 			Log::debug << "Missing 'Track Header' atom (tkhd).\n";
